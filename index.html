@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Financial Habit Tracker</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+</head>
+<body>
+<!-- Header with dropdown menus for all navigation items -->
+<header>
+    <div class="container">
+      <h1>Financial Habit Tracker</h1>
+      <nav>
+        <ul>
+          <li>
+            <a href="#home" class="active">Home</a>
+            <ul class="dropdown">
+              <li><a href="#home">Dashboard</a></li>
+              <li><a href="#summary">Ringkasan Finansial</a></li>
+            </ul>
+          </li>
+          <li>
+            <a href="#habits">Kebiasaan</a>
+            <ul class="dropdown">
+              <li><a href="#add-habits">Tambah Kebiasaan</a></li>
+              <li><a href="#view-habits">Lihat Kebiasaan</a></li>
+              <li><a href="#manage-habits">Kelola Kebiasaan</a></li>
+            </ul>
+          </li>
+          <li>
+            <a href="#progress">Progres</a>
+            <ul class="dropdown">
+              <li><a href="#progress-chart">Grafik Progres</a></li>
+              <li><a href="#progress-analysis">Analisis Progres</a></li>
+            </ul>
+          </li>
+          <li>
+            <a href="#reports">Laporan</a>
+            <ul class="dropdown">
+              <li><a href="#monthly-report">Laporan Bulanan</a></li>
+              <li><a href="#annual-report">Laporan Tahunan</a></li>
+              <li><a href="#export-report">Ekspor Laporan</a></li>
+            </ul>
+          </li>
+          <li>
+            <a href="#settings">Pengaturan</a>
+            <ul class="dropdown">
+              <li><a href="#profile-settings">Profil</a></li>
+              <li><a href="#app-settings">Aplikasi</a></li>
+              <li><a href="#notification-settings">Notifikasi</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="container">
+    <!-- Home Section -->
+    <section id="home" class="active-section">
+      <h2>Selamat Datang di Financial Habit Tracker</h2>
+      <p>Mulailah melacak kebiasaan finansial Anda untuk hidup yang lebih baik!</p>
+      <div class="summary-cards">
+        <div class="card">
+          <h3>Total Pemasukan</h3>
+          <p id="total-income">Rp 0</p>
+        </div>
+        <div class="card">
+          <h3>Total Pengeluaran</h3>
+          <p id="total-expense">Rp 0</p>
+        </div>
+        <div class="card">
+          <h3>Total Tabungan</h3>
+          <p id="total-saving">Rp 0</p>
+        </div>
+      </div>
+      <button id="get-started-btn" class="primary-btn">Mulai Sekarang</button>
+    </section>
+
+    <!-- Habits Section -->
+    <section id="habits">
+      <h2>Daftar Kebiasaan Finansial</h2>
+      <div class="habit-list" id="habit-list">
+        <!-- Daftar kebiasaan akan dimasukkan di sini secara dinamis -->
+      </div>
+      <button class="add-habit-btn" id="add-habit-btn">+ Tambah Kebiasaan</button>
+    </section>
+
+    <!-- Progress Section -->
+    <section id="progress">
+      <h2>Progres Finansial</h2>
+      <div class="progress-chart">
+        <canvas id="progress-chart"></canvas>
+      </div>
+      <div class="analysis">
+        <h3>Analisis Bulan Ini</h3>
+        <p id="progress-analysis"></p>
+        <h3>Rekomendasi</h3>
+        <p id="progress-recommendation"></p>
+      </div>
+    </section>
+
+    <!-- Reports Section -->
+    <section id="reports">
+      <h2>Laporan Bulanan</h2>
+      <div class="month-list">
+        <h3>Pilih Bulan</h3>
+        <ul id="month-list">
+          <!-- Daftar bulan akan dimasukkan di sini secara dinamis -->
+        </ul>
+      </div>
+      <div class="chart-container">
+        <canvas id="finance-chart"></canvas>
+      </div>
+      <div class="analysis">
+        <h3>Analisis Bulanan</h3>
+        <p id="report-analysis"></p>
+        <h3>Rekomendasi</h3>
+        <p id="report-recommendation"></p>
+      </div>
+    </section>
+
+    <!-- Settings Section -->
+    <section id="settings">
+      <h2>Pengaturan</h2>
+      <form id="settings-form">
+        <label for="theme">Tema:</label>
+        <select id="theme" name="theme">
+          <option value="light">Light</option>
+          <option value="dark">Dark</option>
+        </select>
+        <label for="notifications">Notifikasi:</label>
+        <input type="checkbox" id="notifications" name="notifications">
+        <button type="submit">Simpan</button>
+      </form>
+    </section>
+  </main>
+
+  <!-- Modal untuk menambah/edit kebiasaan -->
+  <div class="modal" id="modal">
+    <div class="modal-content">
+      <span class="close-btn" id="close-btn">&times;</span>
+      <h2 id="modal-title">Tambah Kebiasaan Finansial</h2>
+      <input type="text" id="habit-name" placeholder="Nama Kebiasaan">
+      <select id="habit-type">
+        <option value="income">Pemasukan</option>
+        <option value="expense">Pengeluaran</option>
+        <option value="saving">Tabungan</option>
+      </select>
+      <input type="number" id="habit-amount" placeholder="Jumlah (Rp)">
+      <input type="date" id="habit-date">
+      <button id="save-habit-btn">Simpan</button>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>&copy; 2023 Financial Habit Tracker. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
