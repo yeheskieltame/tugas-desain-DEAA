@@ -9,48 +9,20 @@
   <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
 </head>
 <body>
-<!-- Header with dropdown menus for all navigation items -->
+<!-- Header with a single dropdown menu -->
 <header>
     <div class="container">
       <h1>Financial Habit Tracker</h1>
       <nav>
         <ul>
-          <li>
-            <a href="#home" class="active">Home</a>
-            <ul class="dropdown">
-              <li><a href="#home">Dashboard</a></li>
-              <li><a href="#summary">Ringkasan Finansial</a></li>
-            </ul>
-          </li>
-          <li>
-            <a href="#habits">Kebiasaan</a>
-            <ul class="dropdown">
-              <li><a href="#add-habits">Tambah Kebiasaan</a></li>
-              <li><a href="#view-habits">Lihat Kebiasaan</a></li>
-              <li><a href="#manage-habits">Kelola Kebiasaan</a></li>
-            </ul>
-          </li>
-          <li>
-            <a href="#progress">Progres</a>
-            <ul class="dropdown">
-              <li><a href="#progress-chart">Grafik Progres</a></li>
-              <li><a href="#progress-analysis">Analisis Progres</a></li>
-            </ul>
-          </li>
-          <li>
-            <a href="#reports">Laporan</a>
-            <ul class="dropdown">
-              <li><a href="#monthly-report">Laporan Bulanan</a></li>
-              <li><a href="#annual-report">Laporan Tahunan</a></li>
-              <li><a href="#export-report">Ekspor Laporan</a></li>
-            </ul>
-          </li>
-          <li>
-            <a href="#settings">Pengaturan</a>
-            <ul class="dropdown">
-              <li><a href="#profile-settings">Profil</a></li>
-              <li><a href="#app-settings">Aplikasi</a></li>
-              <li><a href="#notification-settings">Notifikasi</a></li>
+          <li class="menu-dropdown">
+            <a href="#" id="menu-toggle">Menu <span class="dropdown-icon">▼</span></a>
+            <ul class="dropdown" id="main-dropdown">
+              <li><a href="#home" class="dropdown-item">Home</a></li>
+              <li><a href="#habits" class="dropdown-item">Kebiasaan</a></li>
+              <li><a href="#progress" class="dropdown-item">Progres</a></li>
+              <li><a href="#reports" class="dropdown-item">Laporan</a></li>
+              <li><a href="#settings" class="dropdown-item">Pengaturan</a></li>
             </ul>
           </li>
         </ul>
