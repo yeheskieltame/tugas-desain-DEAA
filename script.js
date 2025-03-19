@@ -270,50 +270,58 @@ updateCharts();
 updateMonthList();
 showSection('home');
 
-// Add this to your existing script.js file
-
-// Handle sub-menu navigation
+// Handle the single dropdown menu
 document.addEventListener('DOMContentLoaded', () => {
-    // Get all dropdown links
-    const dropdownLinks = document.querySelectorAll('.dropdown a');
+    const menuToggle = document.getElementById('menu-toggle');
+    const menuDropdown = document.querySelector('.menu-dropdown');
+    const dropdownItems = document.querySelectorAll('.dropdown-item');
     
-    // Add click event to each dropdown link
-    dropdownLinks.forEach(link => {
-      link.addEventListener('click', (e) => {
+    // Toggle dropdown menu
+    menuToggle.addEventListener('click', (e) => {
+      e.preventDefault();
+      menuDropdown.classList.toggle('active');
+    });
+    
+    // Handle dropdown item clicks
+    dropdownItems.forEach(item => {
+      item.addEventListener('click', (e) => {
         e.preventDefault();
         
-        // Get the parent section ID (main navigation item)
-        const parentHref = link.closest('li').parentElement.previousElementSibling.getAttribute('href').substring(1);
+        // Get the target section
+        const targetSection = item.getAttribute('href').substring(1);
         
-        // Get the specific subsection
-        const targetSubsection = link.getAttribute('href').substring(1);
+        // Show the section
+        showSection(targetSection);
         
-        // Show the main section first
-        showSection(parentHref);
+        // Update active states
+        dropdownItems.forEach(link => link.classList.remove('active'));
+        item.classList.add('active');
         
-        // If there's a specific subsection, scroll to it
-        if(targetSubsection && targetSubsection !== parentHref) {
-          const element = document.getElementById(targetSubsection);
-          if(element) {
-            setTimeout(() => {
-              element.scrollIntoView({ behavior: 'smooth' });
-            }, 100);
-          }
-        }
-        
-        // Update active state in navigation
-        navLinks.forEach(navLink => navLink.classList.remove('active'));
-        link.closest('li').parentElement.previousElementSibling.classList.add('active');
+        // Close the dropdown
+        menuDropdown.classList.remove('active');
       });
     });
     
     // Close dropdown when clicking outside
     document.addEventListener('click', (e) => {
-      if (!e.target.closest('nav')) {
-        const openDropdowns = document.querySelectorAll('.dropdown');
-        openDropdowns.forEach(dropdown => {
-          dropdown.parentElement.classList.remove('dropdown-active');
-        });
+      if (!menuDropdown.contains(e.target)) {
+        menuDropdown.classList.remove('active');
       }
     });
+    
+    // Set active menu item based on current section
+    function updateActiveMenuItem() {
+      const currentSection = document.querySelector('section.active-section').id;
+      dropdownItems.forEach(item => {
+        const itemSection = item.getAttribute('href').substring(1);
+        if (itemSection === currentSection) {
+          item.classList.add('active');
+        } else {
+          item.classList.remove('active');
+        }
+      });
+    }
+    
+    // Update active menu item on page load
+    updateActiveMenuItem();
   });
